@@ -53,6 +53,9 @@ class OutboundCall:
         self.sentry_tags = sentry_tags
         self.digits = digits
 
+        print("Kachi tested this")
+        logger.debug("Kachi tested this logger")
+
     def create_telephony_client(self) -> AbstractTelephonyClient:
         if isinstance(self.telephony_config, TwilioConfig):
             return TwilioClient(base_url=self.base_url, maybe_twilio_config=self.telephony_config)
