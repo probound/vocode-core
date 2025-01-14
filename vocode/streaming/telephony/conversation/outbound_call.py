@@ -53,9 +53,6 @@ class OutboundCall:
         self.sentry_tags = sentry_tags
         self.digits = digits
 
-        print("Kachi tested this")
-        logger.debug("Kachi tested this logger")
-
     def create_telephony_client(self) -> AbstractTelephonyClient:
         if isinstance(self.telephony_config, TwilioConfig):
             return TwilioClient(base_url=self.base_url, maybe_twilio_config=self.telephony_config)
@@ -88,6 +85,7 @@ class OutboundCall:
 
     async def start(self):
         logger.debug("Starting outbound call")
+        logger.debug("Kachi tested this logger")
         self.telephony_id = await self.telephony_client.create_call(
             conversation_id=self.conversation_id,
             to_phone=self.to_phone,
