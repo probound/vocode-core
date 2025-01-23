@@ -232,7 +232,8 @@ class StreamingConversation(AudioPipeline[OutputDeviceType]):
                 logger.info("Ignoring empty transcription")
                 return
             # ignore utterances during the initial message but still add them to the transcript
-            initial_message_ongoing = not self.conversation.initial_message_tracker.is_set()
+            initial_message_ongoing = False
+            # initial_message_ongoing = not self.conversation.initial_message_tracker.is_set()
             if initial_message_ongoing or self.should_ignore_utterance(transcription):
                 logger.info(
                     f"Ignoring utterance: {transcription.message}. IMO: {initial_message_ongoing}"
