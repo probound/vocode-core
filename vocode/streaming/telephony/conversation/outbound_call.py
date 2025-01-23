@@ -85,7 +85,6 @@ class OutboundCall:
 
     async def start(self):
         logger.debug("Starting outbound call")
-        logger.debug("Kachi tested this logger")
         self.telephony_id = await self.telephony_client.create_call(
             conversation_id=self.conversation_id,
             to_phone=self.to_phone,
