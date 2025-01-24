@@ -228,11 +228,15 @@ class StreamingConversation(AudioPipeline[OutputDeviceType]):
 
         async def process(self, transcription: Transcription):
             self.conversation.mark_last_action_timestamp()
+            logger.info(f"Transcription message: {transcription.message.strip()}")
             if transcription.message.strip() == "":
                 logger.info("Ignoring empty transcription")
                 return
             # ignore utterances during the initial message but still add them to the transcript
             initial_message_ongoing = not self.conversation.initial_message_tracker.is_set()
+            logger.info(f"Initial message tracker: {self.conversation.initial_message_tracker.is_set()}")
+            logger.info(f"Initial message ongoing: {initial_message_ongoing}")
+            logger.info(f"Should ignore utterance: {self.should_ignore_utterance(transcription)}")
             if initial_message_ongoing or self.should_ignore_utterance(transcription):
                 logger.info(
                     f"Ignoring utterance: {transcription.message}. IMO: {initial_message_ongoing}"
